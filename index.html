@@ -3,40 +3,53 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Rincon UD</title>
-	
-	<link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/bootstrap.css" rel="stylesheet">
 
+	<link rel="stylesheet" href="css/jquery-ui-1.8.16.custom.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css">
+        
     <link rel="stylesheet" href="css/template.css" />
+    <link rel="stylesheet" href="css/home.css" />
 	
 	<script src="Tools/HTML5/HTML5_enabling_script.js"></script>
 	<script src="Tools/HTML5/prefixfree.min.js"></script>
 	<script src="Tools/HTML5/jquery.js"></script>
 	<script src="Tools/HTML5/jquery-ui.js"></script>
 	
-	<script src="js/funciones.js"></script>
-	<link  rel="shortcut icon" href="css/imagenes/favicon.ico" />
+	<script src="js/funciones_home.js"></script>
+
 </head>
 <body>
 <header>
 	Rincon UD
 </header>
-<form id='frmLogin'>
-	<h1>Bienvenido de Nuevo</h1>
-	<h3>Por favor, introduzca sus datos de acceso para autenticar.</h3>
-	<label class='labelForm' for='txtUsername'>Usuario:</label><input class='inputForm' type='text' id='txtUsername'/>
-	<label class='labelForm' for='txtPassword'>Clave:</label><input class='inputForm' type='password' id='txtPassword'/>
-	</br></br><input class='ui-button-success ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only' type='submit' id='btnLogin' value='Ingresar'/></br></br>
+	<h3 id='lblWelcome'>Bienvenido <span></span></h3>
+	<form id="frmIniciarSesion">
+		<h1>Bienvenido de Nuevo</h1>
+		<h4>Por favor, introduzca sus datos de acceso para autenticar.</h4>
+		<label class='labelForm' for='txtUsername'>Usuario:</label>
+		<input class='inputForm' type='text' id='txtUsername'/>
+		<label class='labelForm' for='txtPassword'>Clave:</label>
+		<input class='inputForm' type='password' id='txtPassword'/>
+		
 		<div id = "alertEstadoLogin" class="ui-widget">
 			<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
 				<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> 
 				<strong>Error:</strong>Acceso Denegado.</p>
 			</div>
 		</div>
-	<a href='#'>Olvidó su Clave?</a>
-</form>
+		</p>
+	</form>	
+<section id="botones">
+	<p>&nbsp;</p>
+	
+	<p><button id="btnIniciarSesion">Iniciar Sesión</button></p>
+	<p><button id="btnCerrarSesion">Cerrar Sesión</button></p>
+</section>
+<section>
+	mao
+</section>
 <footer>
-	Powered by <a href='https://twitter.com/#!/st4nn'><img src='css/imagenes/LogoBronco-mini.png'/></a>
+	Powered by <input type='image' src='css/imagenes/LogoStan-mini.png'/>
 </footer>
 </body>
 </html>

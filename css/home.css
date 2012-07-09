@@ -1,4 +1,50 @@
-body
+body h3
 {
 	color: white;
+	margin: 0 0 0 4%;
+}
+
+#botones
+{
+	background: #d8d8d8;
+	border-radius: 0.5em;
+	box-shadow: rgba(0,0,0,0.8) 0px 4px 10px;
+	float: left;
+	margin: 1em;
+	padding: 1em;
+	text-align: center;
+	width: 16%;
+}
+
+#botones button
+{
+	background: url("imagenes/background3.jpg");
+	border-radius: 0.5em;
+	box-shadow: rgba(0,0,0,0.8) 0px 4px 10px;
+	color: white;
+	height: 2.5em;
+	width: 80%;
+}
+#botones button:hover
+{
+	background: url("imagenes/background2.jpg");
+	cursor: pointer;
+}
+#botones #Usuario
+{
+	background: white;
+	display: none;
+	border-radius: 0.5em;
+	box-shadow: rgba(0,0,0,0.8) 0px 4px 10px;
+	float:center;
+	width: 80%;
+}
+#botones #Usuario input
+{
+	font-family: "Titulos";
+	width: 90%;
+}
+#frmIniciarSesion
+{
+	display: none;
 }
