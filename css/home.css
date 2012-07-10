@@ -57,7 +57,8 @@ body h3
 #alertEstadoLogin, 
 #CompanyData,
 #CreatingUsers_Create,
-#frmIniciarSesion
+#frmIniciarSesion,
+#MyUsersEdit_Permissions
 {
 	display: none;
 }

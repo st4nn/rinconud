@@ -139,7 +139,7 @@ function CrearUsuario(evento)
 			}
 			else //Si lo Creó
 			{ 
-				//EditarPermisos(Id);
+				EditarPermisos(Id);
 				MostrarAlerta("CreatingUsers_Create", "default", "ui-icon-circle-check", "Hey!", "El Usuario ha sido creado");
 				ResetearContenedor("CreatingUsersCreate");
 			} 
@@ -148,6 +148,85 @@ function CrearUsuario(evento)
 	{
 		MostrarAlerta("CreatingUsers_Create", "error", "ui-icon-alert", "Error!", "Las Claves deben ser iguales");
 	}
+}
+function EditarPermisos(IdUsuario)
+{
+$.post("php/VerPermisos.php",
+		{ Id : Usuario.Id},
+		function(data){
+			$("#UserTableFunctions td").remove();
+			$.each(data,function(index,value) 
+			{
+				if (data[index].IdPermission)
+				{
+					var tds = "<tr id='" + data[index].IdPermission + "'>";
+						  tds += "<td name='" + data[index].IdPermission + "'><input name='chkPermissionState' type='checkbox' id='chk" + data[index].IdFunction + "' AssociatedControl='" + data[index].AssociatedControl + "' IdFunction='" + data[index].IdFunction + "'/></td>";
+						  tds += "<td name='" + data[index].IdPermission + "'>" + data[index].Name + "</td>";
+						  tds += "<td name='" + data[index].IdPermission + "'>" + data[index].Description + "</td>";
+						  tds += "<td name='" + data[index].IdPermission + "' IdFunction='" + data[index].IdFunction + "'></td>";
+						tds += '</tr>';	
+					$("#UserTableFunctions").append(tds);
+				}
+			});
+			$.post("php/VerPermisos.php",
+								{ Id : IdUsuario},
+								function(data2)
+								{
+									$.each(data2,function(index2,value2)
+									{
+										$("#chk" + data2[index2].IdFunction).attr("checked", "checked");
+									});
+								}, "json");
+					},
+		"json");
+		
+		$("#MyUsersEdit_Permissions").dialog({
+		autoOpen: false, 
+		minWidth: 620,
+		title: "Editar Permisos",
+		buttons: [
+			{
+				text: "Ok",
+				click: function() { 
+									var tabla = document.getElementById("UserTableFunctions");
+									var numFilas = tabla.rows.length;
+									var Controles = "";
+									var elementos = tabla.getElementsByTagName("input")
+									for (i = 0; i < numFilas; i++)
+									{
+										if($(elementos[i]).is(':checked'))
+										{
+											Controles += $(elementos[i]).attr("IdFunction") + "@";
+										}
+									}
+									$.post("php/EditarPermiso.php",
+											{Functions: Controles, IdUser: IdUsuario},
+											function(data)
+											{
+												if (parseInt(data) > 0)
+												{
+													$("#MyUsersEdit_Permissions").dialog("close"); 
+												}
+											}
+										  );
+								  }
+			},
+			{
+				text: "Cancel",
+				click: function() { $(this).dialog("close"); 
+								  }
+			}
+				  ]
+								});
+	$("#MyUsersEdit_Permissions").dialog('open');	
+	
+	$.post('php/CargarRoles.php',
+		{Id_Roll : Usuario.IdInitialRoll},
+		function(data)
+		   {
+				$("#MyUsersEdit_Permissions_Roll").html(data);
+		   }, "html"	
+		);
 }
 function IniciarSesion()
 {	
