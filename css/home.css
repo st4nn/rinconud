@@ -44,6 +44,19 @@ body h3
 	font-family: "Titulos";
 	width: 90%;
 }
+#frmCuerpo
+{
+	background: white;
+	border-radius: 0.5em;
+	box-shadow: rgba(0,0,0,0.8) 0px 4px 10px;
+	float: right;
+	margin: 1em;
+	padding: 1em;
+	width: 73%;
+}
+#alertEstadoLogin, 
+#CompanyData,
+#CreatingUsers_Create,
 #frmIniciarSesion
 {
 	display: none;

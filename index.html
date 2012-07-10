@@ -40,16 +40,63 @@
 		</p>
 	</form>	
 <section id="botones">
+	<p><button id="btnCrearUsuario">Crear Usuario</button></p>
 	<p>&nbsp;</p>
 	
 	<p><button id="btnIniciarSesion">Iniciar Sesión</button></p>
 	<p><button id="btnCerrarSesion">Cerrar Sesión</button></p>
+	<footer>
+		Powered by <input type='image' src='css/imagenes/LogoStan-mini.png'/>
+	</footer>
 </section>
-<section>
-	mao
+<section id='frmCuerpo'>
+	<form id='CreatingUsersCreate'>
+		<div id='CreatingUsers_Create' class="ui-state-highlight ui-corner-all">
+			<p>
+				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+				<strong>Hey!</strong> 
+				<texto>The Company has been created.</texto>
+			</p>
+		</div>
+		<label class='labelForm' for='txtCreatingUsersCreate_User'>Usuario: </label>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_User' required/>
+		<label class='labelForm' for='txtCreatingUsersCreate_Password'>Clave: </label>
+			<input class='inputForm' type='password' id='txtCreatingUsersCreate_Password' required/>
+		<label class='labelForm' for='txtCreatingUsersCreate_ReTypePassword'>Nuevamente la Clave: </label>
+			<input class='inputForm' type='password' id='txtCreatingUsersCreate_ReTypePassword'/>
+		
+		<label class='labelForm' for='txtCreatingUsersCreate_Name'>Nombre: </label>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_Name' required/>
+		<label class='labelForm' for='txtCreatingUsersCreate_LastName'>Apellido: </label>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_LastName' required/>
+		<label class='labelForm' for='txtCreatingUsersCreate_DisplayName'>NickName: </label>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_DisplayName' required/>
+		<label class='labelForm' for='txtCreatingUsersCreate_Email'>Correo: </label>
+			<input class='inputForm' type='email' id='txtCreatingUsersCreate_Email'/>
+		
+			<label class='labelForm' for='txtCreatingUsersCreate_Company'>Entidad: </label>
+				<input class='inputForm' type='text' id='txtCreatingUsersCreate_Company' required/>
+					<section id='CompanyData'>
+						<center>
+							<label class='labelForm' id='lblCompanyURL' for='txtCreatingUsersCreate_CompanyUrl'>URL: </label><input class='inputForm' type='text' id='txtCreatingUsersCreate_CompanyUrl'/>
+							<label class='labelForm' id='lblCompanyContact' for='txtCreatingUsersCreate_CompanyDescription'>Descripción: </label><textarea class='inputForm' type='text' id='txtCreatingUsersCreate_CompanyDescription'></textarea>
+							</br>
+							<button class='ui-button-success ui-button ui-widget ui-corner-all' id='btnCompanyDataCreate'>Crear Entidad</button>
+							<button class='ui-button-error ui-button ui-widget ui-corner-all' id = 'btnCompanyDataCancel'>Cancelar</button>
+						</center>
+					</section>
+		
+		<label class='labelForm' for='txtCreatingUsersCreate_Facebook'>Facebook: </label>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_Facebook'/>
+		<label class='labelForm' for='txtCreatingUsersCreate_Twitter'>Twitter: </label>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_Twitter'/>
+		</br></br>
+		<center>
+			<input class='ui-button-success ui-button ui-widget ui-corner-all' type='submit' id='btnMyAccount_Save' value='Crear Usuario'/>
+			<button class='ui-button-default ui-button ui-widget ui-corner-all' id='btnMyAccount_CreatingUsersCreate_Reset'>Reset</button>
+		</center>
+		</br></br>
+	</form>
 </section>
-<footer>
-	Powered by <input type='image' src='css/imagenes/LogoStan-mini.png'/>
-</footer>
 </body>
 </html>
