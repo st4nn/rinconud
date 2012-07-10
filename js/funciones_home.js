@@ -1,20 +1,50 @@
 ﻿var Usuario;
 $(document).on("ready", arranque);
 
+
 function arranque()
 {
+	
+	
+	$("#btnBuscarDocumento").on("click", function()
+										{
+											$("#frmCuerpo form").slideUp();
+											$("#frmBuscarDocumento").slideDown();
+										}
+							);
 	$("#btnCerrarSesion").on("click", btnCerrarSesion_Click);
+	
+	$("#btnCrearUsuario").on("click", function()
+										{
+											$("#frmCuerpo form").slideUp();
+											$("#frmCreatingUsersCreate").slideDown();
+										}
+							);
+	
 	$("#btnCompanyDataCancel").on("click", btnCompanyDataCancel_click);
 	$("#btnCompanyDataCreate").on("click", btnCompanyDataCreate_click);
 	$("#btnIniciarSesion").on("click", btnIniciarSesion_Click);
+	$("#btnSubirArchivo").on('click', function()
+										{
+											$("#frmCuerpo form").slideUp();
+											$("#txtUsuarioId").val(Usuario.Id);
+											$("#frmCreandoDocumentos").slideDown();
+										}
+							);
+	$("#btnVerDocumento").live('click', function()
+										{
+											
+											window.open("Documentos/" + $(this).attr('Ruta'));
+										});
+	
 	$("#CreatingUsersCreate").on('submit', CrearUsuario);
+	$("#frmBuscarDocumento").on('submit', frmBuscarDocumento_Submit);
+	
+	$("#frmCreandoDocumentos").on('submit', frmCreandoDocumentos_Submit);
+	
+	
 	$("#txtCreatingUsersCreate_Company").live("change", VerificarEntidad);
 	CargarUsuario();
-}
-
-function abrirPopup(url)
-{
-	popupWin = window.open(url, 'open_window');
 }
 function btnCerrarSesion_Click()
 {
@@ -103,8 +133,17 @@ function CargarUsuario()
 	{
 		Usuario = JSON.parse(localStorage.Usuario)[0];
 		$("#lblWelcome span").text(Usuario.NickName);
-		//CargarPermisos(Usuario.Id);
+		CargarPermisos(Usuario.Id);
 		$("#btnIniciarSesion").slideUp();
+		if(localStorage.Documento)
+		{
+			var Documento = JSON.parse(localStorage.Documento)[0];
+			$("#frmCuerpo form").slideUp();
+				$("#txtUsuarioId").val(Usuario.Id);
+				$("#frmCreandoDocumentos").slideDown();
+			MostrarAlerta("CreandoDocumentos_Crear", "default", "ui-icon-circle-check", "Hey!", "El Documento: " + Documento.Titulo + " ha sido creado");
+			delete localStorage.Documento;
+		}
 	}else
 	{
 		$("#botones button").slideUp();
@@ -227,6 +266,44 @@ $.post("php/VerPermisos.php",
 				$("#MyUsersEdit_Permissions_Roll").html(data);
 		   }, "html"	
 		);
+}
+function frmBuscarDocumento_Submit(evento)
+{
+	evento.preventDefault();
+	$.post("php/BuscarDocumento.php",
+		{ Parametro : $("#txtBuscarDocumento").val()},
+		function(data){
+			$("#TablaDocumentos td").remove();
+			$.each(data,function(index,value) 
+			{
+				if (data[index].IdDocumento)
+				{
+					var tds = "<tr id='" + data[index].IdDocumento + "'>";
+						  tds += "<td name='" + data[index].IdDocumento + "'>" + data[index].Titulo + "</td>";
+							tds += "<td name='" + data[index].IdDocumento + "'>" + data[index].Descripcion + "</td>";
+							tds += "<td name='" + data[index].IdDocumento + "'>" + data[index].Profesor + "</td>";
+							tds += "<td name='" + data[index].IdDocumento + "'>" + data[index].Carrera + "</td>";
+							tds += "<td name='" + data[index].IdDocumento + "'>" + data[index].Curso + "</td>";
+							tds += "<td name='" + data[index].IdDocumento + "'>" + "<button title='Ver Documento' id='btnVerDocumento' ruta ='" + data[index].Ruta + "' class='ui-button-default ui-button ui-widget ui-corner-all'><strong><span class='ui-icon ui-icon-document'></span></strong></button>" + "</td>";
+						  
+						tds += '</tr>';	
+					$("#TablaDocumentos").append(tds);
+				}
+			});
+				}, "json");
+			
+}
+function frmCreandoDocumentos_Submit()
+{
+	var Documento = {
+    "Titulo" : $("#txtCreandoDocumentos_Titulo").val(),
+    "Descripcion" : $("#txtCreandoDocumentos_Descripcion").val(),
+    "ProfesorNombre" : $("#txtCreandoDocumentos_ProfesorNombre").val(),
+    "ProfesorApellido" : $("#txtCreandoDocumentos_ProfesorApellido").val(),
+    "CarreraNombre" : $("#txtCreandoDocumentos_Carrera").val(),
+	"CursoNombre" : $("#txtCreandoDocumentos_Curso").val()
+	};
+	localStorage.setItem("Documento", '[' + JSON.stringify(Documento) + ']');	
 }
 function IniciarSesion()
 {	

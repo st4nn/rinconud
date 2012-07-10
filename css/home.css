@@ -56,9 +56,19 @@ body h3
 }
 #alertEstadoLogin, 
 #CompanyData,
+#CreandoDocumentos_Crear,
 #CreatingUsers_Create,
+#DatosCarrera,
+#DatosCurso,
+#frmCreandoDocumentos,
+#frmCreatingUsersCreate,
 #frmIniciarSesion,
-#MyUsersEdit_Permissions
+#MyUsersEdit_Permissions,
+#txtUsuarioId
 {
 	display: none;
+}
+#txtBuscarDocumento
+{
+	width: 80%;
 }

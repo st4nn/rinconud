@@ -40,6 +40,8 @@
 		</p>
 	</form>	
 <section id="botones">
+	<p><button id="btnBuscarDocumento">Buscar Documento</button></p>
+	<p><button id="btnSubirArchivo">Crear Documento</button></p>
 	<p><button id="btnCrearUsuario">Crear Usuario</button></p>
 	<p>&nbsp;</p>
 	
@@ -50,7 +52,8 @@
 	</footer>
 </section>
 <section id='frmCuerpo'>
-	<form id='CreatingUsersCreate'>
+	<form id='frmCreatingUsersCreate'>
+	<h1>Crear Usuario</h1>
 		<div id='CreatingUsers_Create' class="ui-state-highlight ui-corner-all">
 			<p>
 				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
@@ -59,23 +62,23 @@
 			</p>
 		</div>
 		<label class='labelForm' for='txtCreatingUsersCreate_User'>Usuario: </label>
-			<input class='inputForm' type='text' id='txtCreatingUsersCreate_User' required/>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_User' required />
 		<label class='labelForm' for='txtCreatingUsersCreate_Password'>Clave: </label>
-			<input class='inputForm' type='password' id='txtCreatingUsersCreate_Password' required/>
+			<input class='inputForm' type='password' id='txtCreatingUsersCreate_Password' required />
 		<label class='labelForm' for='txtCreatingUsersCreate_ReTypePassword'>Nuevamente la Clave: </label>
 			<input class='inputForm' type='password' id='txtCreatingUsersCreate_ReTypePassword'/>
 		
 		<label class='labelForm' for='txtCreatingUsersCreate_Name'>Nombre: </label>
-			<input class='inputForm' type='text' id='txtCreatingUsersCreate_Name' required/>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_Name' required />
 		<label class='labelForm' for='txtCreatingUsersCreate_LastName'>Apellido: </label>
-			<input class='inputForm' type='text' id='txtCreatingUsersCreate_LastName' required/>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_LastName' required />
 		<label class='labelForm' for='txtCreatingUsersCreate_DisplayName'>NickName: </label>
-			<input class='inputForm' type='text' id='txtCreatingUsersCreate_DisplayName' required/>
+			<input class='inputForm' type='text' id='txtCreatingUsersCreate_DisplayName' required />
 		<label class='labelForm' for='txtCreatingUsersCreate_Email'>Correo: </label>
 			<input class='inputForm' type='email' id='txtCreatingUsersCreate_Email'/>
 		
 			<label class='labelForm' for='txtCreatingUsersCreate_Company'>Entidad: </label>
-				<input class='inputForm' type='text' id='txtCreatingUsersCreate_Company' required/>
+				<input class='inputForm' type='text' id='txtCreatingUsersCreate_Company' required />
 					<section id='CompanyData'>
 						<center>
 							<label class='labelForm' id='lblCompanyURL' for='txtCreatingUsersCreate_CompanyUrl'>URL: </label><input class='inputForm' type='text' id='txtCreatingUsersCreate_CompanyUrl'/>
@@ -93,7 +96,6 @@
 		</br></br>
 		<center>
 			<input class='ui-button-success ui-button ui-widget ui-corner-all' type='submit' id='btnMyAccount_Save' value='Crear Usuario'/>
-			<button class='ui-button-default ui-button ui-widget ui-corner-all' id='btnMyAccount_CreatingUsersCreate_Reset'>Reset</button>
 		</center>
 		</br></br>
 	</form>
@@ -109,6 +111,71 @@
 		  <tbody></tbody>
 		</table>
 	</section>
+	
+	<form id='frmCreandoDocumentos' action="php/CrearDocumento.php" method="post" enctype="multipart/form-data">
+		<h1>Crear Documento</h1>
+		<div id='CreandoDocumentos_Crear' class="ui-state-highlight ui-corner-all">
+			<p>
+				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+				<strong>Hey!</strong> 
+				<texto>The Company has been created.</texto>
+			</p>
+		</div>
+		<label class='labelForm' for='txtCreandoDocumentos_Titulo'>Titulo: </label>
+			<input class='inputForm' type='text' name='Titulo' id='txtCreandoDocumentos_Titulo' required />
+		
+		<label class='labelForm' for='txtCreandoDocumentos_Descripcion'>Descripcion: </label>
+			<textarea class='inputForm' type='text' name='Descripcion' id='txtCreandoDocumentos_Descripcion' required ></textarea>
+		<label class='labelForm' for='txtCreandoDocumentos_ProfesorNombre'>Nombre Profesor: </label>
+			<input class='inputForm' type='text' name = 'ProfesorNombre' id='txtCreandoDocumentos_ProfesorNombre' />
+		<label class='labelForm' for='txtCreandoDocumentos_ProfesorApellido'>Apellido Profesor: </label>
+			<input class='inputForm' type='text' name='ProfesorApellido' id='txtCreandoDocumentos_ProfesorApellido' required />
+		
+		<label class='labelForm' for='txtCreandoDocumentos_Carrera'>Nombre Carrera: </label>
+			<input class='inputForm' type='text' name='Carrera' id='txtCreandoDocumentos_Carrera'/>
+					<center>
+						<label class='labelForm' id='lblCompanyContact' for='txtCreandoDocumentos_Carrera_Descripcion'>Descripción Carrera: </label>
+						<textarea class='inputForm' name='CarreraDescripcion' type='text' id='txtCreandoDocumentos_Carrera_Descripcion'></textarea>
+					</center>
+	
+		<label class='labelForm' for='txtCreandoDocumentos_Curso'>Nombre Curso: </label>
+			<input class='inputForm' type='text' name='Curso' id='txtCreandoDocumentos_Curso' required />
+					<center>
+						<label class='labelForm' id='lblCompanyContact' for='txtCreandoDocumentos_Curso_Descripcion'>Descripción Curso: </label>
+						<textarea class='inputForm' name='CursoDescripcion' type='text' id='txtCreandoDocumentos_Curso_Descripcion'></textarea>
+					</center>
+				</br>
+		<center>
+			<input name="archivo" type="file" size="35" />
+			<!--<input name="enviar" type="submit" value="Upload File" />-->
+			<input name="action" type="hidden" value="upload" /> 
+		
+		</br></br>
+		
+			<input class='ui-button-success ui-button ui-widget ui-corner-all' type='submit' value='Crear Documento'/>
+		</center>
+		</br></br>
+		<input class='inputForm' type='text' name='txtUsuarioId' id='txtUsuarioId' />
+	</form>
+	<form id='frmBuscarDocumento' >
+		<h1>Buscar Documento</h1>
+			<input type='text'  id='txtBuscarDocumento' />
+					<input class='ui-button-success ui-button ui-widget ui-corner-all' type='submit' value='Buscar'/>
+					</br>
+					<table id='TablaDocumentos'>
+						<thead>
+							<tr>
+								<th>Titulo</th>
+								<th>Descripcion</th>
+								<th>Profesor</th>
+								<th>Carrera</th>
+								<th>Curso</th>
+								<th>Ver</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+	</form>
 </section>
 </body>
 </html>
