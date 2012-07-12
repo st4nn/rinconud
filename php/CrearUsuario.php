@@ -41,12 +41,13 @@ $CompanyId = CompanyVerify($Company); //Verfica que el nombre de la Compañía e
 		{
 			$sql = "
 			INSERT INTO Login 
-				(IdLogin, Usuario, Clave)
+				(IdLogin, Usuario, Clave, Estado)
 			VALUES
 				(
 			'$UserId', 
 			'$User',   
-			'$Password'
+			'$Password',
+			'Activo'
 				);";		
 
 			mysql_query($sql, $link);

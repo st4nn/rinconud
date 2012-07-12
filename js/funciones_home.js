@@ -12,6 +12,8 @@ function arranque()
 											$("#frmBuscarDocumento").slideDown();
 										}
 							);
+
+	$("#btnCambiarEstado").live("click", btnCambiarEstado_Click);
 	$("#btnCerrarSesion").on("click", btnCerrarSesion_Click);
 	
 	$("#btnCrearUsuario").on("click", function()
@@ -36,15 +38,44 @@ function arranque()
 											
 											window.open("Documentos/" + $(this).attr('Ruta'));
 										});
+	$("#btnVerUsuarios").on("click", function()
+										{
+											$("#frmCuerpo form").slideUp();
+											$("#frmVerUsuarios").slideDown();
+										}
+							);
 	
-	$("#CreatingUsersCreate").on('submit', CrearUsuario);
+	$("#frmCreatingUsersCreate").on('submit', CrearUsuario);
 	$("#frmBuscarDocumento").on('submit', frmBuscarDocumento_Submit);
 	
 	$("#frmCreandoDocumentos").on('submit', frmCreandoDocumentos_Submit);
+	$("#frmVerUsuarios").on('submit', frmVerUsuarios_Submit);
+	
 	
 	
 	$("#txtCreatingUsersCreate_Company").live("change", VerificarEntidad);
 	CargarUsuario();
+}
+function btnCambiarEstado_Click(evento)
+{
+	var EnvEstado = $(this).attr('Estado');
+	var Usuario = $(this).attr('IdUsuario');
+	if (EnvEstado == 'Activo')
+	{
+		EnvEstado = 'Inactivo';
+	} else
+	{
+		EnvEstado = 'Activo';
+	}
+	$.post("php/CambiarEstadoUsuario.php",  
+		{
+			IdUsuario: Usuario,
+			Estado : EnvEstado
+		}, function()
+			{
+				frmVerUsuarios_Submit(evento);
+			}
+		);
 }
 function btnCerrarSesion_Click()
 {
@@ -304,6 +335,34 @@ function frmCreandoDocumentos_Submit()
 	"CursoNombre" : $("#txtCreandoDocumentos_Curso").val()
 	};
 	localStorage.setItem("Documento", '[' + JSON.stringify(Documento) + ']');	
+}
+function frmVerUsuarios_Submit(evento)
+{
+	evento.preventDefault();
+	$.post("php/BuscarUsuarios.php",
+		{ Parametro : $("#txtBuscarUsuario").val()},
+		function(data){
+			$("#TablaUsuarios td").remove();
+			$.each(data,function(index,value) 
+			{
+				if (data[index].IdUsuario)
+				{
+					var tds = "<tr id='" + data[index].IdUsuario + "'>";
+						  tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].IdUsuario + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Nombre + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Apellido + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].NickName + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Correo + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Entidad + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Facebook + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Twitter + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + data[index].Estado + "</td>";
+							tds += "<td name='" + data[index].IdUsuario + "'>" + "<button title='Cambiar Estado' id='btnCambiarEstado' IdUsuario='" + data[index].IdUsuario + "' Estado ='" + data[index].Estado + "' class='ui-button-default ui-button ui-widget ui-corner-all'><strong><span class='ui-icon ui-icon-transferthick-e-w'></span></strong></button>" + "</td>";
+						tds += '</tr>';	
+					$("#TablaUsuarios").append(tds);
+				}
+			});
+				}, "json");	
 }
 function IniciarSesion()
 {	

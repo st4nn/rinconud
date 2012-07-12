@@ -46,6 +46,7 @@ class UserData
 			Login as l, DatosUsuario as d , Entidad as c
 		WHERE
 			l.IdLogin = d.IdDatosUsuario AND d.IdEntidad = c.Identidad AND 
+			l.Estado = 'Activo' AND
 			l.Usuario = '$User' AND l.Clave = '$Pass';";
 				
 	$result=mysql_query($sql, $link); 
